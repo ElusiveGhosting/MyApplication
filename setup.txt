@@ -1,48 +1,50 @@
-psql setup using docker:
+Postgres setup using docker Basics :
 
-install docker application
-docker pull postgres
-docker pull thajeztah/pgadmin4
-create docker image for psql and psql ui using pgadmin4: image
-docker run --name myDB -p 5432:5432 -e POSTGRES_PASSWORD=admin -d postgres
-docker run --rm -p 5050:5050 -d thajeztah/pgadmin4
-open localhost:5050 in browser
+1. install docker application
+2. Pull the required images:
+       docker pull postgres (Manadatory)
+       docker pull thajeztah/pgadmin4 (Optional for comfortable NoCLI UI)
+3. Create the docker container for both psql and UI:
+       docker run --name myDB -p 5432:5432 -e POSTGRES_PASSWORD=admin -d postgres
+       docker run --rm -p 5050:5050 -d thajeztah/pgadmin4
+4. Test psql container (optional)
+       open localhost:5050 in browser
+5. Programmaticc testing of psql container:
+       docker exec -it container#id bash
+       psql -h localhost -p 5432 --user postgres (no password needed)
+                           (or)
+       psql -h localhost -p 5432 --user postgres -W (asks password)
+6. Stop the container (necessary for deleting container) :
+       docker stop container_id
+7. Delete the container:
+       docker rm container_id
+8. Devops testing for created database:
 
-else
-
-docker exec -it container#id bash
-psql -h localhost -p 5432 --user postgres (no password needed)
-psql -h localhost -p 5432 --user postgres -W (asks password)
-
-docker tag postgres psql:own
-docker stop container_id
-docker rm container_id
-
-
-psql commands:
-
-\z show all tables
-CREATE DATABASE mydb;
-\c mydb
-SELECT current_database();
-CREATE TABLE beer();
-DROP TABLE beer;
-\l
-
-
-docker-compose up
-docker-compose stop
+       \z ###show all tables
+       CREATE DATABASE mydb;
+       \c mydb
+       SELECT current_database();
+       CREATE TABLE beer();
+       DROP TABLE beer;
+       \l ### list all databases
 
 
-backup and restore specific db fom cmd line:
 
-docker exec 5df534aedf90 pg_dump -U admin -d mydb > backup.sql   ### data stored where the command run
-docker exec -i 5df534aedf90 psql -U admin -d mydb < backup.sql   ### data stored where the command run
+Postgres using docker-compose file (Advanced)
 
-backup and restore all db's fom cmd line:
+1. Start the container with config as in the file 
+       docker-compose up
+2. Backup and restore specific db fom cmd line:
 
-docker exec 5df534aedf90 pg_dumpall -U admin > backup.sql   ### data stored where the command run
-docker exec -i 5df534aedf90 psql -U admin < backup.sql     ### data stored where the command run
+      docker exec 5df534aedf90 pg_dump -U admin -d mydb > backup.sql   ### data stored where the command run
+      docker exec -i 5df534aedf90 psql -U admin -d mydb < backup.sql   ### data stored where the command run
+3. Backup and restore all db's fom cmd line:
+      docker exec 5df534aedf90 pg_dumpall -U admin > backup.sql   ### data stored where the command run
+      docker exec -i 5df534aedf90 psql -U admin < backup.sql     ### data stored where the command run
+4. Stop container:
+      docker-compose stop
+5. Delete container: (Optional)
+      docker rm container_id
 
 
 
