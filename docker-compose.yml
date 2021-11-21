@@ -2,7 +2,7 @@ version: '2'
 
 services:
   myDatabase:
-    image: psql:own
+    image: postgres:latest
     expose:
       - 5432
     volumes:
