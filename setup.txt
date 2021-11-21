@@ -1,0 +1,49 @@
+psql setup using docker:
+
+install docker application
+docker pull postgres
+docker pull thajeztah/pgadmin4
+create docker image for psql and psql ui using pgadmin4: image
+docker run --name myDB -p 5432:5432 -e POSTGRES_PASSWORD=admin -d postgres
+docker run --rm -p 5050:5050 -d thajeztah/pgadmin4
+open localhost:5050 in browser
+
+else
+
+docker exec -it container#id bash
+psql -h localhost -p 5432 --user postgres (no password needed)
+psql -h localhost -p 5432 --user postgres -W (asks password)
+
+docker tag postgres psql:own
+docker stop container_id
+docker rm container_id
+
+
+psql commands:
+
+\z show all tables
+CREATE DATABASE mydb;
+\c mydb
+SELECT current_database();
+CREATE TABLE beer();
+DROP TABLE beer;
+\l
+
+
+docker-compose up
+docker-compose stop
+
+
+backup and restore specific db fom cmd line:
+
+docker exec 5df534aedf90 pg_dump -U admin -d mydb > backup.sql   ### data stored where the command run
+docker exec -i 5df534aedf90 psql -U admin -d mydb < backup.sql   ### data stored where the command run
+
+backup and restore all db's fom cmd line:
+
+docker exec 5df534aedf90 pg_dumpall -U admin > backup.sql   ### data stored where the command run
+docker exec -i 5df534aedf90 psql -U admin < backup.sql     ### data stored where the command run
+
+
+
+
