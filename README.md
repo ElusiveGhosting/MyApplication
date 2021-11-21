@@ -1,2 +1,1 @@
-# MyApplication
-PostgresSQL+Python+Node+React+MongoDB
+# MyApplication ( PostgresSQL+Python+Node+React+MongoDB )
