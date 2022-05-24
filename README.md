@@ -1,1 +1,1 @@
-# MyApplication ( PostgresSQL+Python+Node+React+MongoDB )
+Postgres setup using Docker
