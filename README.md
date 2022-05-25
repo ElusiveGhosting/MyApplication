@@ -1,5 +1,5 @@
 # Kubernetes Setup
-
+ 
 Install minikube to windows 10
 
 cd "C:\Users\King of Pirates\Documents\Kubernetes"
