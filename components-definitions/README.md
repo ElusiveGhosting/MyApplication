@@ -1,5 +1,5 @@
-# Kubernetes Setup
- 
+Kubernetes Setup:
+
 Install minikube to windows 10
 
 cd "C:\Users\King of Pirates\Documents\Kubernetes"
@@ -40,4 +40,28 @@ kubectl describe replicateset setname #describe a replica-set file definition
 
 kubectl edit replicaset resplicasetname #update replica-set by directly updating the file
 
+kubectl create -f deployment-definition.yaml
 
+kubectl get deployments
+
+kubectl get replicaset
+
+kubectl get pods
+
+kubectl get all
+
+kubectl describe deployment myapp
+
+kubectl rollout status deployment-name
+
+kubectl rollout history deployment-name
+
+kubectl apply -f deployment-definition.yaml
+
+kubectl set image deployment-name nginx=nginx:1.9.1
+
+kubectl rollout undo deployment-name
+
+kubectl edit deployments frontend
+
+kubectl create -f service-definition.yaml
